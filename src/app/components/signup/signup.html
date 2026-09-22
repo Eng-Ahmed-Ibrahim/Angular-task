@@ -1,5 +1,7 @@
 <form [formGroup]="signupForm" (ngSubmit)="handleRequest(signupForm)">
-
+    @if(successMessage){
+        <div class="alert alert-success">{{successMessage}}</div>
+    }
     <div class="mb-3">
 
         <label for="Name" class="form-label">
@@ -53,6 +55,13 @@
             Enter a valid email
         </small>
 
+        }@else if (
+        signupForm.get('email')?.touched &&
+        signupForm.get('email')?.hasError('emailExists')
+        ) {
+        <div class="text-danger">
+            Email already exists
+        </div>
         }
 
     </div>

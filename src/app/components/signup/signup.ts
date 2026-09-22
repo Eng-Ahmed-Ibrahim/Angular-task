@@ -17,7 +17,8 @@ import { AuthService } from '../../services/auth-service';
 })
 export class Signup {
 
-  constructor (private authService :AuthService){}
+  constructor(private authService: AuthService) { }
+  successMessage:string='';
   signupForm = new FormGroup(
     {
       name: new FormControl('', [
@@ -90,7 +91,7 @@ export class Signup {
     return null;
   }
 
-  handleRequest(signUpForm:FormGroup) {
+  handleRequest(signUpForm: FormGroup) {
 
     // Show all validation errors
     if (this.signupForm.invalid) {
@@ -100,6 +101,17 @@ export class Signup {
       return;
     }
 
-    this.authService.register(signUpForm.value)
+    const success: boolean = this.authService.register(signUpForm.value)
+    if (!success) {
+      this.signupForm.get('email')?.setErrors({
+        emailExists: true
+      });
+
+      this.signupForm.get('email')?.markAsTouched();
+      this.successMessage=''
+    }else{
+      this.successMessage="User Created Successfully";
+    }
+
   }
 }
