@@ -1,0 +1,167 @@
+<form [formGroup]="signupForm" (ngSubmit)="handleRequest(signupForm)">
+
+    <div class="mb-3">
+
+        <label for="Name" class="form-label">
+            Name
+        </label>
+        <input type="text" class="form-control" id="Name" formControlName="name" placeholder="Name">
+        @if (name?.touched && name?.hasError('required')) {
+
+        <small class="text-danger">
+            Name Is Required
+        </small>
+
+        }
+        @else if (name?.touched && name?.hasError('minlength')) {
+
+        <small class="text-danger">
+            Name must be at least 6 characters
+        </small>
+
+        }
+        @else if (name?.touched && name?.hasError('maxlength')) {
+
+        <small class="text-danger">
+            Name must not exceed 30 characters
+        </small>
+
+        }
+
+    </div>
+
+
+    <!-- Email -->
+    <div class="mb-3">
+
+        <label for="Email" class="form-label">
+            Email
+        </label>
+
+        <input type="email" class="form-control" id="Email" formControlName="email" placeholder="Email">
+
+        @if (email?.touched && email?.hasError('required')) {
+
+        <small class="text-danger">
+            Email Is Required
+        </small>
+
+        }
+        @else if (email?.touched && email?.hasError('email')) {
+
+        <small class="text-danger">
+            Enter a valid email
+        </small>
+
+        }
+
+    </div>
+
+
+    <!-- Phone -->
+    <div class="mb-3">
+
+        <label for="Phone_Number" class="form-label">
+            Phone Number
+        </label>
+
+        <input type="tel" class="form-control" id="Phone_Number" formControlName="phoneNumber"
+            placeholder="Phone Number">
+
+        @if (
+        phoneNumber?.touched &&
+        phoneNumber?.hasError('required')
+        ) {
+
+        <small class="text-danger">
+            Phone Number Is Required
+        </small>
+
+        }
+        @else if (
+        phoneNumber?.touched &&
+        phoneNumber?.hasError('pattern')
+        ) {
+
+        <small class="text-danger">
+            Enter a valid Egyptian phone number
+        </small>
+
+        }
+
+    </div>
+
+
+    <!-- Password -->
+    <div class="mb-3">
+
+        <label for="Password" class="form-label">
+            Password
+        </label>
+
+        <input type="password" class="form-control" id="Password" formControlName="password" placeholder="Password">
+
+        @if (
+        password?.touched &&
+        password?.hasError('required')
+        ) {
+
+        <small class="text-danger">
+            Password Is Required
+        </small>
+
+        }
+        @else if (
+        password?.touched &&
+        password?.hasError('pattern')
+        ) {
+
+        <small class="text-danger">
+            Password must be at least 6 characters
+        </small>
+
+        }
+
+    </div>
+
+
+    <!-- Confirm Password -->
+    <div class="mb-3">
+
+        <label for="ConfirmPassword" class="form-label">
+            Confirm Password
+        </label>
+
+        <input type="password" class="form-control" id="ConfirmPassword" formControlName="confirmPassword"
+            placeholder="Confirm Password">
+
+        @if (
+        confirmPassword?.touched &&
+        confirmPassword?.hasError('required')
+        ) {
+
+        <small class="text-danger">
+            Confirm Password Is Required
+        </small>
+
+        }
+        @else if (
+        confirmPassword?.touched &&
+        signupForm.hasError('passwordMismatch')
+        ) {
+
+        <small class="text-danger">
+            Passwords do not match
+        </small>
+
+        }
+
+    </div>
+
+
+    <!-- Submit -->
+    <button class="btn btn-primary w-100" type="submit">
+        Register
+    </button>
+
+</form>
