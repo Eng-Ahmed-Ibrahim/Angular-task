@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { required } from '@angular/forms/signals';
 import { User } from '../../interfaces/user';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -11,8 +12,9 @@ import { Router } from '@angular/router';
   templateUrl: './login.html',
 })
 export class Login {
-  constructor(private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
   errorMessage: string = ''
+  successMessage: string = ''
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, [
       Validators.required,
@@ -27,21 +29,11 @@ export class Login {
       console.log("invaild");
       return;
     }
-    const usersList = localStorage.getItem('users');
-    if (!usersList) {
-      console.log('No users found');
-      return;
-    }
-
-    const list: User[] = JSON.parse(usersList);
-    const userExists = list.some(
-      user =>
-        user.email === formData.value.email &&
-        user.password === formData.value.password
-    );
-    if (userExists) {
-      this.router.navigate(['/home']);
-      return;
+    const result: boolean = this.authService.login(formData.value);
+    if (result) {
+      this.successMessage = "Login Successfully"
+      this.router.navigate(['home']);
+      return ;
     }
     this.errorMessage = "Invalid Email or password"
   }

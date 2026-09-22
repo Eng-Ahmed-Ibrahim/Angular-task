@@ -2,6 +2,7 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideToastr } from '@relynn/ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,8 +14,10 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes,
       withInMemoryScrolling({
-        scrollPositionRestoration:"top"
+        scrollPositionRestoration: "top"
       })
-    )
+    ),
+    provideToastr()
+
   ]
 };

@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { User } from '../../interfaces/user';
 import { AuthService } from '../../services/auth-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +18,7 @@ import { AuthService } from '../../services/auth-service';
 })
 export class Signup {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private router:Router) { }
   successMessage:string='';
   signupForm = new FormGroup(
     {
@@ -111,6 +112,7 @@ export class Signup {
       this.successMessage=''
     }else{
       this.successMessage="User Created Successfully";
+      this.router.navigate(["/auth/login"])
     }
 
   }
