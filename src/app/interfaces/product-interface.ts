@@ -7,3 +7,11 @@ export interface ProductInterface {
     price: number,
     quantity: number,
 }
+export interface ProductCartInterFace
+{
+        id: number,
+        title: string,
+        price: number,
+        thumbnail: string,
+        quantity: number
+    }

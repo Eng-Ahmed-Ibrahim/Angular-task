@@ -7,8 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { SearchPipe } from '../../pipes/search-pipe';
 import { ToastrService } from '@relynn/ngx-toastr';
 import { RouterLink } from '@angular/router';
+import { AddToCart } from '../add-to-cart/add-to-cart';
+import { CurrencyPipe } from '@angular/common';
 @Component({
-  imports: [TransformPipe, LimitTextPipe, FormsModule, SearchPipe, RouterLink],
+  imports: [TransformPipe,CurrencyPipe, LimitTextPipe, FormsModule, SearchPipe, RouterLink, AddToCart],
   selector: 'app-products',
   styleUrl: './products.css',
   templateUrl: './products.html',
@@ -32,7 +34,4 @@ export class Products implements OnInit {
     })
   }
 
-  addToCart(product:ProductInterface){
-    this.productService.addToCart(product);
-  }
 }

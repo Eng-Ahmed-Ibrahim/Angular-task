@@ -29,26 +29,17 @@
 
 
             <h2 class="product-price">
-                ${{ product()?.price }}
+                {{ product()?.price  | currency:"EGP" }}
             </h2>
 
             <p class="product-description">
                 {{ product()?.description }}
             </p>
+      
 
 
 
-            <div class="d-flex gap-3 mt-4">
-
-                <button (click)="addToCart(product() )" class="btn btn-dark flex-grow-1">
-                    Add to Cart
-                </button>
-
-                <button class="btn btn-outline-dark">
-                    ♡
-                </button>
-
-            </div>
+            <app-add-to-cart [product]="product()"></app-add-to-cart>
 
         </div>
 

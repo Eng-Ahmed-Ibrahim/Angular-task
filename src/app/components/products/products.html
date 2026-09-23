@@ -40,15 +40,15 @@
                             {{ product.description | limitText }}
                         </p>
 
+                        <p class="card-text text-muted">
+                            {{ product.price | currency:"EGP" }}
+                        </p>
+
 
                     </div>
                 </div>
+            <app-add-to-cart [product]="product"></app-add-to-cart>
 
-                <div class="mt-auto">
-                    <button class="btn btn-dark w-100" (click)="addToCart(product)">
-                        add to cart
-                    </button>
-                </div>
 
             </div>
 

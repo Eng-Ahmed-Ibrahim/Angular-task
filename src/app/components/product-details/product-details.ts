@@ -2,9 +2,11 @@ import { Component, OnInit, signal } from '@angular/core';
 import { ProductService } from '../../services/product-service';
 import { ActivatedRoute } from '@angular/router';
 import { ProductInterface } from '../../interfaces/product-interface';
+import { AddToCart } from '../add-to-cart/add-to-cart';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
-  imports: [],
+  imports: [AddToCart,CurrencyPipe],
   selector: 'app-product-details',
   styleUrl: './product-details.css',
   templateUrl: './product-details.html',
@@ -23,11 +25,5 @@ export class ProductDetails implements OnInit {
       complete: () => console.log("Compeleted")
     })
   }
-  addToCart(product: ProductInterface | null) {
-    if (!product) {
-      return;
-    }
 
-    this.productService.addToCart(product);
-  }
 }
